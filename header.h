@@ -1,27 +1,40 @@
-#include <string>
-
+#ifndef STD_HEADER
+#define STD_HEADER
 
 // Celebrity Data Structure
+
+#include <string>
 
 #define first(L) (L).first
 #define last(L)  (L).last
 #define next(P)  (P)->next
 #define prev(P)  (P)->prev
+#define info(P)  (P)->info
+// list declaration
 
-struct infotypeCeleb {
-    std::string username;
-    listFollowers Follower;
-};
-
+typedef struct Follower *addressFollower;
 typedef struct Celeb *addressCeleb;
-struct Celeb {
-    infotypeCeleb info;
-    addressCeleb next; 
+
+struct listFollowers {
+    addressFollower first;
+    addressFollower last;
 };
 
-typedef struct listCelebs {
+
+struct listCelebs {
     addressCeleb first;
     addressCeleb last;
+};
+
+//----------------------------------
+struct infotypeCeleb {
+    std::string username;
+    listFollowers Followers;
+};
+
+struct Celeb {
+    infotypeCeleb info;
+     addressCeleb next; 
 };
 
 addressCeleb AllocateCeleb (std::string username);
@@ -32,22 +45,14 @@ void DeallocateCeleb (std::string username);
 void InsertCeleb (listCelebs Celebs, addressCeleb);
 void CreateListCeleb (listCelebs);
 
-
 // Followers Data Structure
-
 struct infotypeFollower {
     std::string username;
-    listCelebs Following;
+    struct listCelebs Following;
 };
-
-typedef struct Follower *addressFollower;
 struct Follower {
     infotypeFollower info;
     addressFollower next; 
 };
 
-typedef struct listFollowers {
-    addressFollower first;
-    addressFollower last;
-};
-
+#endif
