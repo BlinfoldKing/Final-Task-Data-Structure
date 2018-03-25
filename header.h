@@ -45,9 +45,8 @@ addressCeleb DeleteFirstCeleb (listCelebs L);
 addressCeleb DeletelastCeleb (listCelebs L);
 
 void DeallocateCeleb (std::string username);
-void InsertCeleb (listCelebs L, addressCeleb);
+void InsertLastCeleb (listCelebs L, addressCeleb);
 void CreateListCeleb (listCelebs L);
-
 void addNewFollower (addressCeleb C, addressFollower F);
 
 // Followers Data Structure

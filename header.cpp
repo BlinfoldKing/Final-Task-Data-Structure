@@ -81,6 +81,16 @@ addressCeleb DeleteCeleb (listCelebs L, addressCeleb C) {
 
 }
 
+void InsertLastCeleb (listCelebs L, addressCeleb C) {
+    if (last (L) == nullptr)
+        last (L) = C;
+    else {
+        next (last (L)) = C;
+        prev (C) = last (L);
+        last (L) = C;
+    }
+}
+
 void addNewFollower (addressCeleb C, addressFollower F) {
     
     listFollowers L = info(C).Followers;

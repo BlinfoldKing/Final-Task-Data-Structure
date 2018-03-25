@@ -11,8 +11,8 @@ TBA
 Celeb Data structure :
 
 * [x] Defining and Implement alocation
-* [ ] Defining and Implement delete operation
-* [ ] Defining and Implement insert operation
+* [x] Defining and Implement delete operation
+* [x] Defining and Implement insert operation
 * [ ] Defining and Implement relation data structure
 
 Follower Data structure :
