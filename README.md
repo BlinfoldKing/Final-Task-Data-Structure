@@ -10,7 +10,7 @@ TBA
 
 Celeb Data structure :
 
-* [ ] Defining and Implement alocation
+* [x] Defining and Implement alocation
 * [ ] Defining and Implement delete operation
 * [ ] Defining and Implement insert operation
 * [ ] Defining and Implement relation data structure

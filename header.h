@@ -34,16 +34,21 @@ struct infotypeCeleb {
 
 struct Celeb {
     infotypeCeleb info;
-     addressCeleb next; 
+     addressCeleb next;
+     addressCeleb prev; 
 };
 
 addressCeleb AllocateCeleb (std::string username);
-addressCeleb GetCeleb (listCelebs Celebs, addressCeleb);
-addressCeleb DeleteCeleb (listCelebs Celebs, addressCeleb);
+addressCeleb GetCeleb (listCelebs Celebs, std::string username);
+addressCeleb DeleteCeleb (listCelebs L, addressCeleb C);
+addressCeleb DeleteFirstCeleb (listCelebs L);
+addressCeleb DeletelastCeleb (listCelebs L);
 
 void DeallocateCeleb (std::string username);
-void InsertCeleb (listCelebs Celebs, addressCeleb);
-void CreateListCeleb (listCelebs);
+void InsertCeleb (listCelebs L, addressCeleb);
+void CreateListCeleb (listCelebs L);
+
+void addNewFollower (addressCeleb C, addressFollower F);
 
 // Followers Data Structure
 struct infotypeFollower {
@@ -54,5 +59,17 @@ struct Follower {
     infotypeFollower info;
     addressFollower next; 
 };
+
+addressFollower AllocateFollower (std::string username);
+addressFollower GetFollower (listFollowers Followers, std::string username);
+addressFollower DeleteFollower (listFollowers L, addressFollower C);
+addressFollower DeleteFirstFollower (listFollowers L);
+addressFollower DeletelastFollower (listFollowers L);
+
+void DeallocateFollower (std::string username);
+void InsertFollower (listFollowers L, addressFollower);
+void CreateListFollower (listFollowers L);
+
+void addNewFollower (addressFollower F, addressFollower C);
 
 #endif
