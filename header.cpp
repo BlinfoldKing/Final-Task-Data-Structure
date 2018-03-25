@@ -20,8 +20,44 @@ addressCeleb GetCeleb (listCelebs L, std::username) {
 
     while (P != nullptr || info(P).username == username)
         P = next (P);
+
     return P; 
 
+}
+
+addressCeleb DeleteFirstCeleb (listCelebs L) {
+
+    addressCeleb P = first (L);
+
+    if (P != nullptr) {
+        if (next (P) == nullptr)
+            last(L)  = nullptr;
+            first(L) = nullptr;
+        else {
+            prev (next (P)) = nullptr;
+            next (P) = nullptr;
+        }
+    }
+
+    return P;
+}
+
+addressCeleb DeleteLastCeleb (listCelebs L) {
+
+    addressCeleb P = last (L);
+
+    if (P != nullptr) {
+        if (last (P) == first (P)) {
+            last(L)  = nullptr;
+            first(L) = nullptr;
+        }
+        else {
+            next (prev (P)) = nullptr;
+            prev (P) = nullptr;
+        }
+    }
+
+    return P;
 }
 
 addressCeleb DeleteCeleb (listCelebs L, addressCeleb C) {
@@ -34,7 +70,10 @@ addressCeleb DeleteCeleb (listCelebs L, addressCeleb C) {
         } else if (P == last(L)) {
             P = DeletelastCeleb (L);
         } else {
-            
+            prev (next (P)) = prev(P);
+            next (prev (P)) = next(P);
+            next (P) = nullptr;
+            prev (P) = nullptr
         }
     }
 
