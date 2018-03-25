@@ -1,7 +1,6 @@
 #include <string>
-
+#include "celebs.h"
 // Followers Data Structure
-
 struct infotypeFollower {
     std::string username;
     listCelebs Following;
