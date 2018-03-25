@@ -24,10 +24,11 @@ typedef struct listCelebs {
     addressCeleb last;
 };
 
-
+addressCeleb AllocateCeleb (std::string username);
 addressCeleb GetCeleb (listCelebs Celebs, addressCeleb);
 addressCeleb DeleteCeleb (listCelebs Celebs, addressCeleb);
 
+void DeallocateCeleb (std::string username);
 void InsertCeleb (listCelebs Celebs, addressCeleb);
 void CreateListCeleb (listCelebs);
 
