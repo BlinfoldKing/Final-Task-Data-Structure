@@ -1,5 +1,4 @@
 #include <string>
-#include "followers.h"
 
 // Celebrity Data Structure
 
