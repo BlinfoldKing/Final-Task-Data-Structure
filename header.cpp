@@ -85,6 +85,10 @@ addressCeleb DeleteCeleb (listCelebs L, addressCeleb C) {
 
 }
 
+void InserFirstCeleb (listCelebs L, addressCeleb C) {
+
+}
+
 void InsertLastCeleb (listCelebs L, addressCeleb C) {
     if (last (L) == nullptr)
         last (L) = C;
@@ -93,6 +97,10 @@ void InsertLastCeleb (listCelebs L, addressCeleb C) {
         prev (C) = last (L);
         last (L) = C;
     }
+}
+
+void InsertAfterCeleb (listCelebs L, addressCeleb Prec, addressCeleb C) {
+
 }
 
 void sortFollowing (listCelebs L1){
@@ -218,6 +226,10 @@ void DeallocateFollower (addressFollower P) {
     P = nullptr;
 }
 
+void InsertFirstFollower (listFollowers L, addressFollower F) {
+
+}
+
 void InsertLastFollower (listFollowers L, addressFollower F) {
     if (last(L) == nullptr)
         last(L) = F;
@@ -226,6 +238,10 @@ void InsertLastFollower (listFollowers L, addressFollower F) {
         prev(F) = last (L);
         last(L) = F;
     }
+}
+
+void InsertAfterFollower (listFollowers L, addressFollower Prec, addressFollower F) {
+    
 }
 
 void CreateListFollower (listFollowers L){
