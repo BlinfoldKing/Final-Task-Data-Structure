@@ -6,6 +6,7 @@ addressCeleb AllocateCeleb (std::string username) {
 
     P = new Celeb;
     info(P).username = username;
+    info(P).numberOfFollowers = 0;
     next(P) = nullptr;
     prev(P) = nullptr;
 
@@ -94,6 +95,28 @@ void InsertLastCeleb (listCelebs L, addressCeleb C) {
     }
 }
 
+void sortFollowing (listCelebs L1){
+    listCelebs L2;
+    CreateListCeleb(L2);
+    while(first(L1) != nullptr) {
+        addressCeleb P = DeletelastCeleb(L1);
+        if (first(L2) == nullptr) {
+            InsertFirstCeleb(L2, P);
+        } else if (info(P).numberOfFollowers <= info(first(L2)).numberOfFollowers) {
+            InsertFirstCeleb(L2, P);
+        } else if (info(P).numberOfFollowers >= info(first(L2)).numberOfFollowers) {
+            InsertLastCeleb(L2, P);
+        } else {
+            addressFollower Q = first(L2);
+            while(info(next(Q)).numberOfFollowers < info(P).numberOfFollowers) {
+                Q = next(Q);
+            }
+            InsertAfterCeleb(L2, Q, P);
+        }
+    }
+    L1 = L2;
+}
+
 void addNewFollower (addressCeleb C, addressFollower F) {
     
     listFollowers L = info(C).Followers;
@@ -114,6 +137,7 @@ addressFollower AllocateFollower (std::string username) {
     
     P = new Follower;
     info(P).username = username;
+    info(P).numberofFollowing = 0;
     next(P) = nullptr;
     prev(P) = nullptr;
 
@@ -209,6 +233,29 @@ void CreateListFollower (listFollowers L){
     last (L) = nullptr;
 }
 
+void sortFollower (listFollowers L1){
+    listFollowers L2;
+    CreateListFollower(L2);
+    while(first(L1) != nullptr) {
+        addressFollower P = DeleteLastFollower(L1);
+        if (first(L2) == nullptr) {
+            InsertFirstFollower(L2, P);
+        } else if (info(P).numberofFollowing <= info(first(L2)).numberofFollowing) {
+            InsertFirstFollower(L2, P);
+        } else if (info(P).numberofFollowing >= info(first(L2)).numberofFollowing) {
+            InsertLastFollower(L2, P);
+        } else {
+            addressFollower Q = first(L2);
+            while(info(next(Q)).numberofFollowing < info(P).numberofFollowing) {
+                Q = next(Q);
+            }
+            InsertAfterFollower(L2, Q, P);
+        }
+    }
+    L1 = L2;
+}
+
+
 void addNewFollowing (addressFollower F, addressCeleb C){
     
     listCelebs L = info(F).Following;
@@ -218,4 +265,5 @@ void addNewFollowing (addressFollower F, addressCeleb C){
         InsertLastCeleb(L, C);
     else
         cout << "username has already existed";
+
 }
