@@ -102,3 +102,106 @@ void addNewFollower (addressCeleb C, addressFollower F) {
         cout << "username has already existed";
         
 }
+
+// Followers Implementation
+
+addressFollower AllocateFollower (std::string username) {
+    addressFollower P;
+    P = new Follower;
+    info(P).username = username;
+    next(P) = nullptr;
+    prev(P) = nullptr;
+
+    return p;
+}
+
+
+addressFollower GetFollower (listFollowers Followers, std::string username) {
+    addressFollower P = first (L);
+
+    while (P != nullptr && info(P).username != username)
+        P = next (P);
+
+    return P; 
+}
+
+addressFollower DeleteFollower (listFollowers L, addressFollower F) {
+    address P = GetFollower (info(F).username);
+
+    if (P != nullptr) {
+        if (P == first(L)) {
+            P = DeleteFirstFollower (L);
+        } else if (P == last(L)) {
+            P = DeleteLastFollower (L);
+        } else {
+            prev (next (P)) = prev(P);
+            next (prev (P)) = next(P);
+            next (P) = nullptr;
+            prev (P) = nullptr
+        }
+    }
+
+    return P;
+}
+
+addressFollower DeleteFirstFollower (listFollowers L) {
+    
+    addressFollower P = first (L);
+
+    if (P != nullptr) {
+        if (P == last(L)) {
+            last(L)  = nullptr;
+            first(L) = nullptr;
+        } else {
+            first(L) = next(first(L));
+            next(P) = nullptr;
+            prev(first(L)) = nullptr;
+        }
+    }
+
+    return P;
+}
+
+addressFollower DeleteLastFollower (listFollowers L) {
+
+    addressFollower P = last (L);
+
+    if (P != nullptr) {
+        if (P == first(L)) {
+            last(L)  = nullptr;
+            first(L) = nullptr;
+        }
+        else {
+            last(L) = prev(P);
+            prev(P) = nullptr;
+            next(last(L)) = nullptr;
+        }
+    }
+
+    return P;
+
+}
+
+void DeallocateFollower (addressFollower P) {
+    delete P;
+    P = nullptr;
+}
+
+void InsertLastFollower (listFollowers L, addressFollower F) {
+    if (last(L) == nullptr)
+        last(L) = F;
+    else {
+        next(last(L)) = F;
+        prev(F) = last (L);
+        last(L) = F;
+    }
+}
+
+void CreateListFollower (listFollowers L){
+    first (L) = nullptr;
+    last (L) = nullptr;
+}
+
+void addNewFollowing (addressFollower F, addressCeleb C){
+
+}

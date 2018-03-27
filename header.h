@@ -54,9 +54,11 @@ struct infotypeFollower {
     std::string username;
     struct listCelebs Following;
 };
+
 struct Follower {
     infotypeFollower info;
     addressFollower next; 
+    addressFollower prev;
 };
 
 addressFollower AllocateFollower (std::string username);
@@ -69,6 +71,6 @@ void DeallocateFollower (std::string username);
 void InsertFollower (listFollowers L, addressFollower);
 void CreateListFollower (listFollowers L);
 
-void addNewFollower (addressFollower F, addressFollower C);
+void addNewFollowing (addressFollower F, addressCeleb C);
 
 #endif
