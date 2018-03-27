@@ -1,8 +1,11 @@
 #include "header.h"
 
 addressCeleb AllocateCeleb (std::string username) {
-    addressCeleb p;
-    info(p).username = username;
+    
+    addressCeleb P;
+
+    P = new Celeb;
+    info(P).username = username;
     next(P) = nullptr;
     prev(P) = nullptr;
 
@@ -18,7 +21,7 @@ addressCeleb GetCeleb (listCelebs L, std::username) {
 
     addressCeleb P = first (L);
 
-    while (P != nullptr || info(P).username == username)
+    while (P != nullptr && info(P).username == username)
         P = next (P);
 
     return P; 
@@ -106,7 +109,9 @@ void addNewFollower (addressCeleb C, addressFollower F) {
 // Followers Implementation
 
 addressFollower AllocateFollower (std::string username) {
+    
     addressFollower P;
+    
     P = new Follower;
     info(P).username = username;
     next(P) = nullptr;
@@ -117,6 +122,7 @@ addressFollower AllocateFollower (std::string username) {
 
 
 addressFollower GetFollower (listFollowers Followers, std::string username) {
+   
     addressFollower P = first (L);
 
     while (P != nullptr && info(P).username != username)
@@ -126,6 +132,7 @@ addressFollower GetFollower (listFollowers Followers, std::string username) {
 }
 
 addressFollower DeleteFollower (listFollowers L, addressFollower F) {
+    
     address P = GetFollower (info(F).username);
 
     if (P != nullptr) {
@@ -203,6 +210,7 @@ void CreateListFollower (listFollowers L){
 }
 
 void addNewFollowing (addressFollower F, addressCeleb C){
+    
     listCelebs L = info(F).Following;
     P = GetCeleb(L, info(C).username);
 
