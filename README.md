@@ -17,9 +17,9 @@ Celeb Data structure :
 
 Follower Data structure :
 
-* [ ] Defining and Implement alocation
-* [ ] Defining and Implement delete operation
-* [ ] Defining and Implement insert operation
+* [x] Defining and Implement alocation
+* [x] Defining and Implement delete operation
+* [x] Defining and Implement insert operation
 * [ ] Defining and Implement relation data structure
 
 User Interface :

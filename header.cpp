@@ -203,5 +203,11 @@ void CreateListFollower (listFollowers L){
 }
 
 void addNewFollowing (addressFollower F, addressCeleb C){
+    listCelebs L = info(F).Following;
+    P = GetCeleb(L, info(C).username);
 
+    if (P != nullptr)
+        InsertLastCeleb(L, C);
+    else
+        cout << "username has already existed";
 }

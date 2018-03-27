@@ -68,9 +68,8 @@ addressFollower DeleteFirstFollower (listFollowers L);
 addressFollower DeletelastFollower (listFollowers L);
 
 void DeallocateFollower (std::string username);
-void InsertFollower (listFollowers L, addressFollower);
+void InsertLastFollower (listFollowers L, addressFollower F);
 void CreateListFollower (listFollowers L);
-
 void addNewFollowing (addressFollower F, addressCeleb C);
 
 #endif
