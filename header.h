@@ -53,7 +53,7 @@ void DeallocateCeleb (std::string username);
 void InserFirstCeleb (listCelebs L, addressCeleb C);
 void InsertLastCeleb (listCelebs L, addressCeleb C);
 void InsertAfterCeleb (listCelebs L, addressCeleb Prec, addressCeleb C);
-void sortFollowing (listCelebs L1);
+void sortCeleb (listCelebs L1);
 void addNewFollower (addressCeleb C, addressFollower F);
 
 // Followers Data Structure

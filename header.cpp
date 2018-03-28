@@ -63,7 +63,7 @@ addressCeleb DeleteLastCeleb (listCelebs L) {
 
 addressCeleb DeleteCeleb (listCelebs L, addressCeleb C) {
 
-    addressCeleb P = GetCeleb (info (C).username);
+    addressCeleb P = GetCeleb (L, info (C).username);
 
     if (P != nullptr) {
         if (P == first (L)) {
@@ -87,7 +87,7 @@ void CreateListCeleb (listCelebs L) {
     last (L) = nullptr;
 }
 
-void DeallocateFollower (addressCeleb C) {
+void DeallocateCeleb (addressCeleb P) {
     delete P;
     P = nullptr;
 }
@@ -116,16 +116,16 @@ void InsertLastCeleb (listCelebs L, addressCeleb C) {
 
 void InsertAfterCeleb (listCelebs L, addressCeleb Prec, addressCeleb C) {
     if (Prec != nullptr)
-        InsertLastFollower (L, C);
+        InsertLastCeleb (L, C);
     else {
         next (C) = next (Prec);
         prev (C) = Prec;
         prev (next (Prec)) = C;
-        next (Prec) = P;
+        next (Prec) = C;
     }
 }
 
-void sortFollowing (listCelebs L1){
+void sortCeleb (listCelebs L1){
     
     listCelebs L2;
     CreateListCeleb (L2);
@@ -141,7 +141,7 @@ void sortFollowing (listCelebs L1){
         } else if (info (P).numberOfFollowers >= info (first (L2)).numberOfFollowers) {
             InsertLastCeleb (L2, P);
         } else {
-            addressFollower Q = first (L2);
+            addressCeleb Q = first (L2);
             while (info (next (Q)).numberOfFollowers < info (P).numberOfFollowers)
                 Q = next (Q);
             InsertAfterCeleb(L2, Q, P);
@@ -155,7 +155,7 @@ void sortFollowing (listCelebs L1){
 void addNewFollower (addressCeleb C, addressFollower F) {
     
     listFollowers L = info (C).Followers;
-    P = GetFollower (L, info (F).username);
+    addressFollower P = GetFollower (L, info (F).username);
 
     if (P != nullptr)
         InsertLastFollower (L, F);
@@ -176,11 +176,11 @@ addressFollower AllocateFollower (std::string username) {
     next (P) = nullptr;
     prev (P) = nullptr;
 
-    return p;
+    return P;
 }
 
 
-addressFollower GetFollower (listFollowers Followers, std::string username) {
+addressFollower GetFollower (listFollowers L, std::string username) {
    
     addressFollower P = first (L);
 
@@ -230,7 +230,7 @@ addressFollower DeleteLastFollower (listFollowers L) {
 
 addressFollower DeleteFollower (listFollowers L, addressFollower F) {
     
-    addressFollower P = GetFollower (info (F).username);
+    addressFollower P = GetFollower (L, info (F).username);
 
     if (P != nullptr) {
         if (P == first (L)) {
@@ -282,7 +282,7 @@ void InsertAfterFollower (listFollowers L, addressFollower Prec, addressFollower
         next (F) = next (Prec);
         prev (F) = Prec;
         prev (next (Prec)) = F;
-        next (Prec) = P;
+        next (Prec) = F;
     }
 }
 
@@ -321,7 +321,7 @@ void sortFollower (listFollowers L1){
 void addNewFollowing (addressFollower F, addressCeleb C){
     
     listCelebs L = info (F).Following;
-    P = GetCeleb(L, info (C).username);
+    addressCeleb P = GetCeleb(L, info (C).username);
 
     if (P != nullptr)
         InsertLastCeleb (L, C);
