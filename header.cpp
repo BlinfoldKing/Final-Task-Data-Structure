@@ -13,7 +13,7 @@ addressCeleb AllocateCeleb (std::string username) {
     return p;
 }
 
-addressCeleb GetCeleb (listCelebs L, std::username) {
+addressCeleb GetCeleb (listCelebs L, std::string username) {
 
     addressCeleb P = first (L);
 
@@ -63,7 +63,7 @@ addressCeleb DeleteLastCeleb (listCelebs L) {
 
 addressCeleb DeleteCeleb (listCelebs L, addressCeleb C) {
 
-    address P = GetCeleb (info (C).username);
+    addressCeleb P = GetCeleb (info (C).username);
 
     if (P != nullptr) {
         if (P == first (L)) {
