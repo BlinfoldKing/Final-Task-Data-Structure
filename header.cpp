@@ -10,7 +10,7 @@ addressCeleb AllocateCeleb (std::string username) {
     next (P) = nullptr;
     prev (P) = nullptr;
 
-    return p;
+    return P;
 }
 
 addressCeleb GetCeleb (listCelebs L, std::string username) {
@@ -74,7 +74,7 @@ addressCeleb DeleteCeleb (listCelebs L, addressCeleb C) {
             prev (next (P)) = prev (P);
             next (prev (P)) = next (P);
             next (P) = nullptr;
-            prev (P) = nullptr
+            prev (P) = nullptr;
         }
     }
 
