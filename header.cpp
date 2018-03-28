@@ -160,7 +160,7 @@ void addNewFollower (addressCeleb C, addressFollower F) {
     if (P != nullptr)
         InsertLastFollower (L, F);
     else
-        cout << "username has already existed";
+        std::cout << "username has already existed";
         
 }
 
@@ -230,7 +230,7 @@ addressFollower DeleteLastFollower (listFollowers L) {
 
 addressFollower DeleteFollower (listFollowers L, addressFollower F) {
     
-    address P = GetFollower (info (F).username);
+    addressFollower P = GetFollower (info (F).username);
 
     if (P != nullptr) {
         if (P == first (L)) {
@@ -326,6 +326,6 @@ void addNewFollowing (addressFollower F, addressCeleb C){
     if (P != nullptr)
         InsertLastCeleb (L, C);
     else
-        cout << "username has already existed";
+        std::cout << "username has already existed";
 
 }
