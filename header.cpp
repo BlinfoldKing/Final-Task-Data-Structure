@@ -164,6 +164,28 @@ void addNewFollower (addressCeleb C, addressFollower F) {
         
 }
 
+void viewAllCeleb (listCelebs L) {
+    if (first (L) != nullptr && last (L) != nullptr) {
+        addressCeleb P = first(L);
+        while (P != last (L)) {
+            std::cout << info(P).username;
+            P = next (P);
+        }
+    }
+}
+
+void viewCeleb (listCelebs L, std::string username) {
+    if (first (L) != nullptr && last (L) != nullptr) {
+        addressCeleb P = GetCeleb (L, username);
+        if (P = nullptr) {
+            std::cout << "username doesn't exits";
+        } else {
+            cout << info (P).username;
+            viewAllFollower (info (P).Followers);
+        }
+    }
+}
+
 // Followers Implementation
 
 addressFollower AllocateFollower (std::string username) {
@@ -328,4 +350,26 @@ void addNewFollowing (addressFollower F, addressCeleb C){
     else
         std::cout << "username has already existed";
 
+}
+
+void viewAllFollower (listFollowers L) {
+    if (first (L) != nullptr && last (L) != nullptr) {
+        addressFollower P = first(L);
+        while (P != last (L)) {
+            std::cout << info(P).username;
+            P = next (P);
+        }
+    }
+}
+
+void viewFollower (listFollowers L, std::string username) {
+    if (first (L) != nullptr && last (L) != nullptr) {
+        addressFollower P = GetFollower (L, username);
+        if (P = nullptr) {
+            std::cout << "username doesn't exits";
+        } else {
+            cout << info (P).username;
+            viewAllFollower (info (P).Following);
+        }
+    }
 }
