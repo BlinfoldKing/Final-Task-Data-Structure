@@ -1,6 +1,7 @@
 #ifndef STD_HEADER
 #define STD_HEADER
 
+#include <iostream>
 #include <string>
 
 // Macros
