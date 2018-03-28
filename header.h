@@ -43,15 +43,15 @@ struct Celeb {
 
 addressCeleb AllocateCeleb (std::string username);
 addressCeleb GetCeleb (listCelebs Celebs, std::string username);
-addressCeleb DeleteCeleb (listCelebs L, addressCeleb C);
 addressCeleb DeleteFirstCeleb (listCelebs L);
-addressCeleb DeletelastCeleb (listCelebs L);
+addressCeleb DeleteLastCeleb (listCelebs L);
+addressCeleb DeleteCeleb (listCelebs L, addressCeleb C);
 
+void CreateListCeleb (listCelebs L);
 void DeallocateCeleb (std::string username);
 void InserFirstCeleb (listCelebs L, addressCeleb C);
 void InsertLastCeleb (listCelebs L, addressCeleb C);
 void InsertAfterCeleb (listCelebs L, addressCeleb Prec, addressCeleb C);
-void CreateListCeleb (listCelebs L);
 void sortFollowing (listCelebs L1);
 void addNewFollower (addressCeleb C, addressFollower F);
 
@@ -73,13 +73,13 @@ addressFollower AllocateFollower (std::string username);
 addressFollower GetFollower (listFollowers Followers, std::string username);
 addressFollower DeleteFollower (listFollowers L, addressFollower C);
 addressFollower DeleteFirstFollower (listFollowers L);
-addressFollower DeletelastFollower (listFollowers L);
+addressFollower DeleteLastFollower (listFollowers L);
 
+void CreateListFollower (listFollowers L);
 void DeallocateFollower (std::string username);
 void InsertFirstFollower (listFollowers L, addressFollower F);
 void InsertLastFollower (listFollowers L, addressFollower F);
 void InsertAfterFollower (listFollowers L, addressFollower Prec, addressFollower F);
-void CreateListFollower (listFollowers L);
 void sortFollower (listFollowers L1);
 void addNewFollowing (addressFollower F, addressCeleb C);
 
