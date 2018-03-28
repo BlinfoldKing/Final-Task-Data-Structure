@@ -69,7 +69,7 @@ addressCeleb DeleteCeleb (listCelebs L, addressCeleb C) {
         if (P == first (L)) {
             P = DeleteFirstCeleb (L);
         } else if (P == last (L)) {
-            P = DeletelastCeleb (L);
+            P = DeleteLastCeleb (L);
         } else {
             prev (next (P)) = prev (P);
             next (prev (P)) = next (P);
@@ -92,7 +92,7 @@ void DeallocateCeleb (addressCeleb P) {
     P = nullptr;
 }
 
-void InserFirstCeleb (listCelebs L, addressCeleb C) {
+void InsertFirstCeleb (listCelebs L, addressCeleb C) {
     if (first (L) == nullptr) {
         first (L) = C;
         last (L) = C;
@@ -132,7 +132,7 @@ void sortCeleb (listCelebs L1){
     
     while (first (L1) != nullptr) {
 
-        addressCeleb P = DeletelastCeleb (L1);
+        addressCeleb P = DeleteLastCeleb (L1);
         
         if (first (L2) == nullptr) {
             InsertFirstCeleb (L2, P);
