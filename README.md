@@ -25,3 +25,14 @@ Follower Data structure :
 User Interface :
 
 * TBA
+
+Task :
+
+* [ ] Add new celebrity
+* [ ] Add new follower
+* [ ] Add relation between follower and celebrity
+* [ ] Remove certain celebrity
+* [ ] Show all celebrities with all of its followers
+* [ ] Show the follower that is owned by a certain celebrity
+* [ ] Show celebrity that has the most follower and all its followers
+* [ ] Show followers who follow more than three celebrity
