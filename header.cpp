@@ -183,7 +183,7 @@ void viewAllCeleb (listCelebs L) {
 void viewCeleb (listCelebs L, std::string username) {
     if (first (L) != nullptr && last (L) != nullptr) {
         addressCeleb P = GetCeleb (L, username);
-        if (P = nullptr)
+        if (P == nullptr)
             std::cout << "username doesn't exits";
         else {
             std::cout << info (P).username;
@@ -376,7 +376,7 @@ void viewAllFollower (listFollowers L) {
 void viewFollower (listFollowers L, std::string username) {
     if (first (L) != nullptr && last (L) != nullptr) {
         addressFollower P = GetFollower (L, username);
-        if (P = nullptr)
+        if (P == nullptr)
             std::cout << "username doesn't exits";
         else {
             std::cout << info (P).username;
