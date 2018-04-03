@@ -125,7 +125,7 @@ void InsertAfterCeleb (listCelebs L, addressCeleb Prec, addressCeleb C) {
     }
 }
 
-void sortCeleb (listCelebs L1){
+void sortCeleb (listCelebs L1) {
     
     listCelebs L2;
     CreateListCeleb (L2);
@@ -134,13 +134,13 @@ void sortCeleb (listCelebs L1){
 
         addressCeleb P = DeleteLastCeleb (L1);
         
-        if (first (L2) == nullptr) {
+        if (first (L2) == nullptr)
             InsertFirstCeleb (L2, P);
-        } else if (info (P).numberOfFollowers <= info (first (L2)).numberOfFollowers) {
+        else if (info (P).numberOfFollowers <= info (first (L2)).numberOfFollowers)
             InsertFirstCeleb (L2, P);
-        } else if (info (P).numberOfFollowers >= info (first (L2)).numberOfFollowers) {
+        else if (info (P).numberOfFollowers >= info (first (L2)).numberOfFollowers)
             InsertLastCeleb (L2, P);
-        } else {
+        else {
             addressCeleb Q = first (L2);
             while (info (next (Q)).numberOfFollowers < info (P).numberOfFollowers)
                 Q = next (Q);
@@ -177,9 +177,9 @@ void viewAllCeleb (listCelebs L) {
 void viewCeleb (listCelebs L, std::string username) {
     if (first (L) != nullptr && last (L) != nullptr) {
         addressCeleb P = GetCeleb (L, username);
-        if (P = nullptr) {
+        if (P = nullptr)
             std::cout << "username doesn't exits";
-        } else {
+        else {
             cout << info (P).username;
             viewAllFollower (info (P).Followers);
         }
@@ -255,11 +255,11 @@ addressFollower DeleteFollower (listFollowers L, addressFollower F) {
     addressFollower P = GetFollower (L, info (F).username);
 
     if (P != nullptr) {
-        if (P == first (L)) {
+        if (P == first (L))
             P = DeleteFirstFollower (L);
-        } else if (P == last (L)) {
+        else if (P == last (L))
             P = DeleteLastFollower (L);
-        } else {
+        else {
             prev (next (P)) = prev (P);
             next (prev (P)) = next (P);
             next (P) = nullptr;
@@ -308,12 +308,12 @@ void InsertAfterFollower (listFollowers L, addressFollower Prec, addressFollower
     }
 }
 
-void CreateListFollower (listFollowers L){
+void CreateListFollower (listFollowers L) {
     first (L) = nullptr;
     last (L) = nullptr;
 }
 
-void sortFollower (listFollowers L1){
+void sortFollower (listFollowers L1) {
     listFollowers L2;
     CreateListFollower (L2);
 
@@ -321,26 +321,25 @@ void sortFollower (listFollowers L1){
         
         addressFollower P = DeleteLastFollower(L1);
         
-        if (first (L2) == nullptr) {
+        if (first (L2) == nullptr)
             InsertFirstFollower (L2, P);
-        } else if (info (P).numberofFollowing <= info (first (L2)).numberofFollowing) {
+        else if (info (P).numberofFollowing <= info (first (L2)).numberofFollowing)
             InsertFirstFollower (L2, P);
-        } else if (info (P).numberofFollowing >= info (first (L2)).numberofFollowing) {
+        else if (info (P).numberofFollowing >= info (first (L2)).numberofFollowing)
             InsertLastFollower (L2, P);
-        } else {
+        else {
             addressFollower Q = first (L2);
-            while (info (next (Q)).numberofFollowing < info (P).numberofFollowing) {
+            while (info (next (Q)).numberofFollowing < info (P).numberofFollowing)
                 Q = next (Q);
             InsertAfterFollower (L2, Q, P);
         }
-    
     }
 
     L1 = L2;
 }
 
 
-void addNewFollowing (addressFollower F, addressCeleb C){
+void addNewFollowing (addressFollower F, addressCeleb C) {
     
     listCelebs L = info (F).Following;
     addressCeleb P = GetCeleb(L, info (C).username);
@@ -365,11 +364,11 @@ void viewAllFollower (listFollowers L) {
 void viewFollower (listFollowers L, std::string username) {
     if (first (L) != nullptr && last (L) != nullptr) {
         addressFollower P = GetFollower (L, username);
-        if (P = nullptr) {
+        if (P = nullptr)
             std::cout << "username doesn't exits";
-        } else {
+        else {
             cout << info (P).username;
-            viewAllFollower (info (P).Following);
+            viewAllCeleb (info (P).Following);
         }
     }
 }
