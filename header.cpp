@@ -78,6 +78,12 @@ addressCeleb DeleteCeleb (listCelebs L, addressCeleb C) {
         }
     }
 
+    listFollowers Followers = info (C).Followers;
+
+    while (first (Followers) != nullptr) {
+        DeleteLastFollower (Followers);
+    }
+
     return P;
 
 }
@@ -180,7 +186,7 @@ void viewCeleb (listCelebs L, std::string username) {
         if (P = nullptr)
             std::cout << "username doesn't exits";
         else {
-            cout << info (P).username;
+            std::cout << info (P).username;
             viewAllFollower (info (P).Followers);
         }
     }
@@ -265,6 +271,12 @@ addressFollower DeleteFollower (listFollowers L, addressFollower F) {
             next (P) = nullptr;
             prev (P) = nullptr;
         }
+    }
+
+    listCelebs Following = info (F).Following;
+
+    while (first (Following) != nullptr) {
+        DeleteLastCeleb (Following);
     }
 
     return P;
@@ -367,7 +379,7 @@ void viewFollower (listFollowers L, std::string username) {
         if (P = nullptr)
             std::cout << "username doesn't exits";
         else {
-            cout << info (P).username;
+            std::cout << info (P).username;
             viewAllCeleb (info (P).Following);
         }
     }
