@@ -6,7 +6,7 @@ addressCeleb AllocateCeleb (std::string username) {
     P = new Celeb;
 
     listFollowers Followers;
-    CreateListFollower(Followers)
+    CreateListFollower(Followers);
 
     info (P).username = username;
     info (P).numberOfFollowers = 0;
