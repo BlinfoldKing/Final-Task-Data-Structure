@@ -5,8 +5,12 @@ addressCeleb AllocateCeleb (std::string username) {
     addressCeleb P;
     P = new Celeb;
 
+    listFollowers Followers;
+    CreateListFollower(Followers)
+
     info (P).username = username;
     info (P).numberOfFollowers = 0;
+    info (P).Followers = Followers;
     next (P) = nullptr;
     prev (P) = nullptr;
 
@@ -199,8 +203,12 @@ addressFollower AllocateFollower (std::string username) {
     addressFollower P;
     P = new Follower;
 
+    listCelebs Following;
+    CreateListCeleb(Following);
+
     info (P).username = username;
     info (P).numberofFollowing = 0;
+    info (P).Following = Following;
     next (P) = nullptr;
     prev (P) = nullptr;
 
