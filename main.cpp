@@ -16,7 +16,7 @@ int state = 0;
      2  : follower mode [signup]
 */
 
-void INIT () {
+void init () {
     CreateListCeleb(L_C);
     CreateListFollower(L_F);
 }
@@ -38,16 +38,18 @@ void showMenu () {
 
 void CelebSignUp () {
     cout << "=============New Celeb==============\n\n";
-    InsertLastCeleb(L_C, AllocateCeleb(getString("Enter new Username : ")));
+    addressCeleb P = AllocateCeleb(getString("Enter new Username : "));
+
+    InsertLastCeleb(L_C, P);
     clrscr();
-    cout << "new Celeb added\n";
+    cout << "new Celeb : "<< info(last(L_C)).username << " added\n";
     state = 0;
 }
 
 
 void FollowerSignUp () {
     cout << "=============New Follower===========\n\n";
-    InsertLastFollower(L_F, AllocateFollower(getString("Enter new Username : ")));
+    InsertLastFollower(L_F, AllocateFollower("hh"));
     clrscr();
     cout << "new Follower : "<< info(last(L_F)).username << " added\n";
     state = 0;
@@ -55,6 +57,7 @@ void FollowerSignUp () {
 
 int main () {
 
+    init();
 
     while(state != -1) {
         cout << '\n';

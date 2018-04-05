@@ -43,20 +43,20 @@ struct Celeb {
 };
 
 addressCeleb AllocateCeleb (std::string username);
-addressCeleb GetCeleb (listCelebs Celebs, std::string username);
-addressCeleb DeleteFirstCeleb (listCelebs L);
-addressCeleb DeleteLastCeleb (listCelebs L);
-addressCeleb DeleteCeleb (listCelebs L, addressCeleb C);
+addressCeleb GetCeleb (listCelebs &L, std::string username);
+addressCeleb DeleteFirstCeleb (listCelebs &L);
+addressCeleb DeleteLastCeleb (listCelebs &L);
+addressCeleb DeleteCeleb (listCelebs &L, addressCeleb C);
 
-void CreateListCeleb (listCelebs L);
+void CreateListCeleb (listCelebs &L);
 void DeallocateCeleb (std::string username);
-void InserFirstCeleb (listCelebs L, addressCeleb C);
-void InsertLastCeleb (listCelebs L, addressCeleb C);
-void InsertAfterCeleb (listCelebs L, addressCeleb Prec, addressCeleb C);
-void sortCeleb (listCelebs L1);
+void InserFirstCeleb (listCelebs &L, addressCeleb C);
+void InsertLastCeleb (listCelebs &L, addressCeleb C);
+void InsertAfterCeleb (listCelebs &L, addressCeleb Prec, addressCeleb C);
+void sortCeleb (listCelebs &L1);
 void addNewFollower (addressCeleb C, addressFollower F);
-void viewAllCeleb (listCelebs L);
-void viewCeleb (listCelebs L, std::string username);
+void viewAllCeleb (listCelebs &L);
+void viewCeleb (listCelebs &L, std::string username);
 
 // Followers Data Structure
 
@@ -73,16 +73,16 @@ struct Follower {
 };
 
 addressFollower AllocateFollower (std::string username);
-addressFollower GetFollower (listFollowers Followers, std::string username);
-addressFollower DeleteFollower (listFollowers L, addressFollower C);
-addressFollower DeleteFirstFollower (listFollowers L);
-addressFollower DeleteLastFollower (listFollowers L);
+addressFollower GetFollower (listFollowers &Followers, std::string username);
+addressFollower DeleteFollower (listFollowers &L, addressFollower C);
+addressFollower DeleteFirstFollower (listFollowers &L);
+addressFollower DeleteLastFollower (listFollowers &L);
 
-void CreateListFollower (listFollowers L);
+void CreateListFollower (listFollowers &L);
 void DeallocateFollower (std::string username);
-void InsertFirstFollower (listFollowers L, addressFollower F);
-void InsertLastFollower (listFollowers L, addressFollower F);
-void InsertAfterFollower (listFollowers L, addressFollower Prec, addressFollower F);
+void InsertFirstFollower (listFollowers &L, addressFollower F);
+void InsertLastFollower (listFollowers &L, addressFollower F);
+void InsertAfterFollower (listFollowers &L, addressFollower Prec, addressFollower F);
 void sortFollower (listFollowers L1);
 void addNewFollowing (addressFollower F, addressCeleb C);
 void viewAllFollower (listFollowers L);

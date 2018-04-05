@@ -17,7 +17,7 @@ addressCeleb AllocateCeleb (std::string username) {
     return P;
 }
 
-addressCeleb GetCeleb (listCelebs L, std::string username) {
+addressCeleb GetCeleb (listCelebs &L, std::string username) {
 
     addressCeleb P = first (L);
 
@@ -28,7 +28,7 @@ addressCeleb GetCeleb (listCelebs L, std::string username) {
 
 }
 
-addressCeleb DeleteFirstCeleb (listCelebs L) {
+addressCeleb DeleteFirstCeleb (listCelebs &L) {
 
     addressCeleb P = first (L);
 
@@ -46,7 +46,7 @@ addressCeleb DeleteFirstCeleb (listCelebs L) {
     return P;
 }
 
-addressCeleb DeleteLastCeleb (listCelebs L) {
+addressCeleb DeleteLastCeleb (listCelebs &L) {
 
     addressCeleb P = last (L);
 
@@ -65,7 +65,7 @@ addressCeleb DeleteLastCeleb (listCelebs L) {
     return P;
 }
 
-addressCeleb DeleteCeleb (listCelebs L, addressCeleb C) {
+addressCeleb DeleteCeleb (listCelebs &L, addressCeleb C) {
 
     addressCeleb P = GetCeleb (L, info (C).username);
 
@@ -92,7 +92,7 @@ addressCeleb DeleteCeleb (listCelebs L, addressCeleb C) {
 
 }
 
-void CreateListCeleb (listCelebs L) {
+void CreateListCeleb (listCelebs &L) {
     first (L) = nullptr;
     last (L) = nullptr;
 }
@@ -102,7 +102,7 @@ void DeallocateCeleb (addressCeleb P) {
     P = nullptr;
 }
 
-void InsertFirstCeleb (listCelebs L, addressCeleb C) {
+void InsertFirstCeleb (listCelebs &L, addressCeleb C) {
     if (first (L) == nullptr) {
         first (L) = C;
         last (L) = C;
@@ -113,8 +113,9 @@ void InsertFirstCeleb (listCelebs L, addressCeleb C) {
     }
 }
 
-void InsertLastCeleb (listCelebs L, addressCeleb C) {
-    if (first (L) == nullptr) {
+void InsertLastCeleb (listCelebs &L, addressCeleb C) {
+    if (last (L) == nullptr) {
+        std::cout << "test";
         first (L) = C;
         last (L) = C;
     } else {
@@ -124,7 +125,7 @@ void InsertLastCeleb (listCelebs L, addressCeleb C) {
     }
 }
 
-void InsertAfterCeleb (listCelebs L, addressCeleb Prec, addressCeleb C) {
+void InsertAfterCeleb (listCelebs &L, addressCeleb Prec, addressCeleb C) {
     if (Prec != nullptr)
         InsertLastCeleb (L, C);
     else {
@@ -135,7 +136,7 @@ void InsertAfterCeleb (listCelebs L, addressCeleb Prec, addressCeleb C) {
     }
 }
 
-void sortCeleb (listCelebs L1) {
+void sortCeleb (listCelebs &L1) {
     
     listCelebs L2;
     CreateListCeleb (L2);
@@ -174,7 +175,7 @@ void addNewFollower (addressCeleb C, addressFollower F) {
         
 }
 
-void viewAllCeleb (listCelebs L) {
+void viewAllCeleb (listCelebs &L) {
     if (first (L) != nullptr && last (L) != nullptr) {
         addressCeleb P = first(L);
         while (P != last (L)) {
@@ -184,7 +185,7 @@ void viewAllCeleb (listCelebs L) {
     }
 }
 
-void viewCeleb (listCelebs L, std::string username) {
+void viewCeleb (listCelebs &L, std::string username) {
     if (first (L) != nullptr && last (L) != nullptr) {
         addressCeleb P = GetCeleb (L, username);
         if (P == nullptr)
@@ -216,7 +217,7 @@ addressFollower AllocateFollower (std::string username) {
 }
 
 
-addressFollower GetFollower (listFollowers L, std::string username) {
+addressFollower GetFollower (listFollowers &L, std::string username) {
    
     addressFollower P = first (L);
 
@@ -226,7 +227,7 @@ addressFollower GetFollower (listFollowers L, std::string username) {
     return P; 
 }
 
-addressFollower DeleteFirstFollower (listFollowers L) {
+addressFollower DeleteFirstFollower (listFollowers &L) {
     
     addressFollower P = first (L);
 
@@ -244,7 +245,7 @@ addressFollower DeleteFirstFollower (listFollowers L) {
     return P;
 }
 
-addressFollower DeleteLastFollower (listFollowers L) {
+addressFollower DeleteLastFollower (listFollowers &L) {
 
     addressFollower P = last (L);
 
@@ -264,7 +265,7 @@ addressFollower DeleteLastFollower (listFollowers L) {
 
 }
 
-addressFollower DeleteFollower (listFollowers L, addressFollower F) {
+addressFollower DeleteFollower (listFollowers &L, addressFollower F) {
     
     addressFollower P = GetFollower (L, info (F).username);
 
@@ -295,7 +296,7 @@ void DeallocateFollower (addressFollower P) {
     P = nullptr;
 }
 
-void InsertFirstFollower (listFollowers L, addressFollower F) {
+void InsertFirstFollower (listFollowers &L, addressFollower F) {
     if (first (L) == nullptr) {
         first (L) = F;
         last (L) = F;
@@ -306,8 +307,8 @@ void InsertFirstFollower (listFollowers L, addressFollower F) {
     }
 }
 
-void InsertLastFollower (listFollowers L, addressFollower F) {
-    if (first (L) == nullptr) {
+void InsertLastFollower (listFollowers &L, addressFollower F) {
+    if (last (L) == nullptr) {
         first (L) = F;
         last (L) = F;
     } else {
@@ -317,7 +318,7 @@ void InsertLastFollower (listFollowers L, addressFollower F) {
     }
 }
 
-void InsertAfterFollower (listFollowers L, addressFollower Prec, addressFollower F) {
+void InsertAfterFollower (listFollowers &L, addressFollower Prec, addressFollower F) {
     if (Prec != nullptr)
         InsertLastFollower (L, F);
     else {
@@ -328,7 +329,7 @@ void InsertAfterFollower (listFollowers L, addressFollower Prec, addressFollower
     }
 }
 
-void CreateListFollower (listFollowers L) {
+void CreateListFollower (listFollowers &L) {
     first (L) = nullptr;
     last (L) = nullptr;
 }

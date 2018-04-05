@@ -2,9 +2,11 @@
 
 
 std::string getString (std::string text) {
-    std::cout <<  text;
+    std::cout << text;
     std::string res;
     std::cin >> res;
+
+    
     return res;
 }
 
