@@ -1,7 +1,7 @@
 #include "header.h"
 #include <string>
 
-std::string getString () ;
+std::string getString (std::string) ;
 int getNum ();
 
 int multiChoice (std::string choice[], int Nchoice);
