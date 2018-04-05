@@ -24,7 +24,16 @@ Follower Data structure :
 
 User Interface :
 
-* TBA
+* [x] Creating The Main Loop
+* [x] Making the main menu
+* [] Creating The Add Celeb menu
+* [] Creating The Add Follower menu
+* [] Creating view to traversing followers of a celeb
+* [] Creating view to traversing celebs of a followers
+* [] Creating menu to delete follower fo a celeb
+* [] Creating menu to delete celeb of a follower
+* [] Creating menu to delete celeb
+* [] Creating menu to delete follower
 
 Task :
 
