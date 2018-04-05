@@ -49,14 +49,14 @@ addressCeleb DeleteLastCeleb (listCelebs &L);
 addressCeleb DeleteCeleb (listCelebs &L, addressCeleb C);
 
 void CreateListCeleb (listCelebs &L);
-void DeallocateCeleb (std::string username);
+void DeallocateCeleb (addressCeleb C);
 void InserFirstCeleb (listCelebs &L, addressCeleb C);
 void InsertLastCeleb (listCelebs &L, addressCeleb C);
 void InsertAfterCeleb (listCelebs &L, addressCeleb Prec, addressCeleb C);
 void sortCeleb (listCelebs &L1);
 void addNewFollower (addressCeleb C, addressFollower F);
-void viewAllCeleb (listCelebs &L);
-void viewCeleb (listCelebs &L, std::string username);
+void viewAllCeleb (listCelebs L);
+void viewCeleb (listCelebs L, std::string username);
 
 // Followers Data Structure
 
@@ -79,7 +79,7 @@ addressFollower DeleteFirstFollower (listFollowers &L);
 addressFollower DeleteLastFollower (listFollowers &L);
 
 void CreateListFollower (listFollowers &L);
-void DeallocateFollower (std::string username);
+void DeallocateFollower (addressFollower F);
 void InsertFirstFollower (listFollowers &L, addressFollower F);
 void InsertLastFollower (listFollowers &L, addressFollower F);
 void InsertAfterFollower (listFollowers &L, addressFollower Prec, addressFollower F);

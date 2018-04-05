@@ -21,7 +21,7 @@ addressCeleb GetCeleb (listCelebs &L, std::string username) {
 
     addressCeleb P = first (L);
 
-    while (P != nullptr && info (P).username == username)
+    while (P != nullptr && info (P).username != username && P != last(L))
         P = next (P);
 
     return P; 
@@ -115,7 +115,6 @@ void InsertFirstCeleb (listCelebs &L, addressCeleb C) {
 
 void InsertLastCeleb (listCelebs &L, addressCeleb C) {
     if (last (L) == nullptr) {
-        std::cout << "test";
         first (L) = C;
         last (L) = C;
     } else {
@@ -175,17 +174,20 @@ void addNewFollower (addressCeleb C, addressFollower F) {
         
 }
 
-void viewAllCeleb (listCelebs &L) {
+void viewAllCeleb (listCelebs L) {
     if (first (L) != nullptr && last (L) != nullptr) {
         addressCeleb P = first(L);
-        while (P != last (L)) {
-            std::cout << info(P).username;
+        while (P != nullptr) {
+            std::cout << info(P).username << '\n';
             P = next (P);
         }
+    } else {
+        std::cout << "[empty]";
     }
+
 }
 
-void viewCeleb (listCelebs &L, std::string username) {
+void viewCeleb (listCelebs L, std::string username) {
     if (first (L) != nullptr && last (L) != nullptr) {
         addressCeleb P = GetCeleb (L, username);
         if (P == nullptr)
@@ -334,7 +336,7 @@ void CreateListFollower (listFollowers &L) {
     last (L) = nullptr;
 }
 
-void sortFollower (listFollowers L1) {
+void sortFollower (listFollowers &L1) {
     listFollowers L2;
     CreateListFollower (L2);
 
@@ -375,10 +377,12 @@ void addNewFollowing (addressFollower F, addressCeleb C) {
 void viewAllFollower (listFollowers L) {
     if (first (L) != nullptr && last (L) != nullptr) {
         addressFollower P = first(L);
-        while (P != last (L)) {
-            std::cout << info(P).username;
+        while (P != nullptr) {
+            std::cout << info(P).username << '\n';
             P = next (P);
         }
+    } else {
+        std::cout << "[empty]";
     }
 }
 

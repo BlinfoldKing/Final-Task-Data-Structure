@@ -1,0 +1,1 @@
+g++ -std=c++11 main.cpp header.cpp userInterface.cpp clrscr.cpp -o ./build/linux/main && ./build/linux/main
