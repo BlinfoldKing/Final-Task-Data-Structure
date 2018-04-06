@@ -21,11 +21,15 @@ addressCeleb GetCeleb (listCelebs &L, std::string username) {
 
     addressCeleb P = first (L);
 
-    while (P != nullptr && info (P).username != username && P != last(L))
-        P = next (P);
-
-    return P; 
-
+    if (P != nullptr) {
+        while (P != last(L) && info (P).username != username )
+            P = next (P);
+    
+        if (info(P).username == username)
+            return P;
+    }
+     
+    return nullptr;
 }
 
 addressCeleb DeleteFirstCeleb (listCelebs &L) {
