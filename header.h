@@ -82,7 +82,7 @@ void DeallocateFollower (addressFollower F);
 void InsertFirstFollower (listFollowers &L, addressFollower F);
 void InsertLastFollower (listFollowers &L, addressFollower F);
 void InsertAfterFollower (listFollowers &L, addressFollower Prec, addressFollower F);
-void sortFollower (listFollowers L1);
+void sortFollower (listFollowers &L1);
 void viewAllFollower (listFollowers L);
 void viewFollower (listFollowers L, std::string username);
 

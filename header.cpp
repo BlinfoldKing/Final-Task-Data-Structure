@@ -169,7 +169,7 @@ void viewAllCeleb (listCelebs L) {
     if (first (L) != nullptr && last (L) != nullptr) {
         addressCeleb P = first(L);
         while (P != nullptr) {
-            std::cout << info(P).username << '\n';
+            std::cout << "  " << info(P).username << '\n';
             P = next (P);
         }
     } else {
@@ -184,7 +184,9 @@ void viewCeleb (listCelebs L, std::string username) {
         if (P == nullptr)
             std::cout << "username doesn't exits";
         else {
-            std::cout << info (P).username;
+            std::cout << "username       : " << info (P).username;
+            std::cout << "\nfollower count : " << info (P).numberOfFollowers;
+            std::cout << "\nFollowers   : \n";
             viewAllFollower (info (P).Followers);
         }
     }
@@ -356,11 +358,13 @@ void viewAllFollower (listFollowers L) {
     if (first (L) != nullptr && last (L) != nullptr) {
         addressFollower P = first(L);
         while (P != nullptr) {
-            std::cout << info(P).username << '\n';
+            std::cout << "username    : " << info(P).username << '\n';
+            std::cout << "following count : " << info(P).numberofFollowing;
+            std::cout << "\n followers : \n";
             P = next (P);
         }
     } else {
-        std::cout << "[empty]";
+        std::cout << "[empty]\n";
     }
 }
 

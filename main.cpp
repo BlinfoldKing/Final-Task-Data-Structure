@@ -13,14 +13,6 @@ addressCeleb currCeleb;
 addressFollower currFollower;
 
 int state = 0;
-/*
-    -1 : exit
-     0  : select mode
-     1  : celeb mode [signup]
-     2  : follower mode [signup]
-     3  : celeb logged
-*/
-
 
 void init () {
     CreateListCeleb(L_C);
@@ -35,12 +27,14 @@ void Follow (string Celeb, string Follower) {
         if (GetFollower(info(C).Followers, Follower) == nullptr) { 
             InsertLastFollower(info(C).Followers, AllocateFollower(Follower));
             info(C).numberOfFollowers++;
+            sortCeleb(L_C);
         } else
             cout << "username has already existed";
 
         if (GetCeleb(info(F).Following, Celeb) == nullptr) { 
             InsertLastCeleb(info(F).Following, AllocateCeleb(Celeb));
             info(F).numberofFollowing++;
+            sortFollower(L_F);
         } else
             cout << "username has already existed";
     }
@@ -49,14 +43,14 @@ void Follow (string Celeb, string Follower) {
 
 void Continue() {
     char k;
-    cout << "Enter 0 continue\n";
+    cout << "\nEnter 0 continue >";
     while( k != '0') {
         cin >> k;
     }
 }
 
 int main () {
-
+    clrscr();
     init();
     string menu[9] = {
         "Add new Celeb",
@@ -76,7 +70,7 @@ int main () {
         
         if (state == 0){
             cout << "Choose the mode\n";
-            state = multiChoice(menu, 7);
+            state = multiChoice(menu, 9);
         }else
         if (state == 1) {
             InsertLastCeleb (L_C, AllocateCeleb(getString("Masukan username celeb baru : ")));        
@@ -98,27 +92,43 @@ int main () {
             state = 0;
         } else
         if (state == 4) {
-            addressFollower F = GetFollower(info(GetCeleb(L_C, getString("enter the celeb username : "))).Followers, getString("enter the follower name : "));
+            addressCeleb C = GetCeleb(L_C, getString("enter the celeb username : "));
+            addressFollower F = GetFollower(info(C).Followers, getString("enter the follower name : "));
             if (F == nullptr) 
                 cout << "Follower not found  ";
             else {
-                cout << "username    : " << info(F).username;
-                cout << "celeb count : " << info(F).numberofFollowing;
-                cout << "Followers   : ";
-                viewAllCeleb (info(F).Following);
+                viewFollower (info(C).Followers, info(F).username);
             }
             Continue();
             state = 0;
         } else 
         if (state == 5) {
-            
+            viewCeleb(L_C, info(last(L_C)).username);
+            Continue();
+            state = 0;
         }
         if (state == 6) {
-            
+            InsertLastFollower (L_F, AllocateFollower(getString("Masukan username follower baru : ")));        
+            state = 0;   
         }
         if (state == 7) {
-            
+            Follow(getString("masukan username celeb : "), getString("masukan username follower : "));
+            state = 0;
         } else 
+        if (state == 8) {
+            addressFollower F = first(L_F);
+
+            while (F != nullptr) {
+
+                if(info(F).numberofFollowing > 3) {
+                    viewFollower(L_F, info(F).username);
+                }
+
+                F = next(F);
+            }   
+            Continue();
+            state = 0;            
+        }
         if (state == 9){
             state = -1;
         } 
@@ -131,19 +141,6 @@ int main () {
         clrscr();
     
     }
-
-
-    // addressCeleb C = AllocateCeleb("danu");
-    // addressFollower F = AllocateFollower("jancok");
-    // addressFollower F2 = AllocateFollower("jancok");
-
-    // addNewFollower(C, F);
-    // addNewFollower(C, F2);
-    // viewAllFollower(info(C).Followers);
-    // addNewFollowing(F, C);
-    // viewAllCeleb(info(F).Following);
-
-    //cout << info(last(info(C).Followers)).username;
 
     return 0;
 }
