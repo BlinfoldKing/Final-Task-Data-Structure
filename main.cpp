@@ -121,7 +121,7 @@ int main () {
             while (F != nullptr) {
 
                 if(info(F).numberofFollowing > 3) {
-                    viewFollower(L_F, info(F).username);
+                    viewAllCeleb(info(F).Following);
                 }
 
                 F = next(F);
@@ -132,11 +132,6 @@ int main () {
         if (state == 9){
             state = -1;
         } 
-
-
-
-
-
 
         clrscr();
     
