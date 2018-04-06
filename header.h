@@ -54,7 +54,6 @@ void InserFirstCeleb (listCelebs &L, addressCeleb C);
 void InsertLastCeleb (listCelebs &L, addressCeleb C);
 void InsertAfterCeleb (listCelebs &L, addressCeleb Prec, addressCeleb C);
 void sortCeleb (listCelebs &L1);
-void addNewFollower (addressCeleb C, addressFollower F);
 void viewAllCeleb (listCelebs L);
 void viewCeleb (listCelebs L, std::string username);
 
@@ -84,7 +83,6 @@ void InsertFirstFollower (listFollowers &L, addressFollower F);
 void InsertLastFollower (listFollowers &L, addressFollower F);
 void InsertAfterFollower (listFollowers &L, addressFollower Prec, addressFollower F);
 void sortFollower (listFollowers L1);
-void addNewFollowing (addressFollower F, addressCeleb C);
 void viewAllFollower (listFollowers L);
 void viewFollower (listFollowers L, std::string username);
 

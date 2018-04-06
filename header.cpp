@@ -6,11 +6,10 @@ addressCeleb AllocateCeleb (std::string username) {
     P = new Celeb;
 
     listFollowers Followers;
-    CreateListFollower(Followers);
+    CreateListFollower(info (P).Followers);
 
     info (P).username = username;
     info (P).numberOfFollowers = 0;
-    info (P).Followers = Followers;
     next (P) = nullptr;
     prev (P) = nullptr;
 
@@ -166,18 +165,6 @@ void sortCeleb (listCelebs &L1) {
     L1 = L2;
 }
 
-void addNewFollower (addressCeleb C, addressFollower F) {
-    
-    listFollowers L = info (C).Followers;
-    addressFollower P = GetFollower (L, info (F).username);
-
-    if (P == nullptr)
-        InsertLastFollower (L, F);
-    else
-        std::cout << "username has already existed";
-        
-}
-
 void viewAllCeleb (listCelebs L) {
     if (first (L) != nullptr && last (L) != nullptr) {
         addressCeleb P = first(L);
@@ -186,7 +173,7 @@ void viewAllCeleb (listCelebs L) {
             P = next (P);
         }
     } else {
-        std::cout << "[empty]";
+        std::cout << "[empty]\n";
     }
 
 }
@@ -211,11 +198,10 @@ addressFollower AllocateFollower (std::string username) {
     P = new Follower;
 
     listCelebs Following;
-    CreateListCeleb(Following);
+    CreateListCeleb(info (P).Following);
 
     info (P).username = username;
     info (P).numberofFollowing = 0;
-    info (P).Following = Following;
     next (P) = nullptr;
     prev (P) = nullptr;
 
@@ -365,18 +351,6 @@ void sortFollower (listFollowers &L1) {
     L1 = L2;
 }
 
-
-void addNewFollowing (addressFollower F, addressCeleb C) {
-    
-    listCelebs L = info (F).Following;
-    addressCeleb P = GetCeleb(L, info (C).username);
-
-    if (P == nullptr)
-        InsertLastCeleb (L, C);
-    else
-        std::cout << "username has already existed";
-
-}
 
 void viewAllFollower (listFollowers L) {
     if (first (L) != nullptr && last (L) != nullptr) {
