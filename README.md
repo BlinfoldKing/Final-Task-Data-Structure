@@ -37,5 +37,5 @@ Task :
 * [x] Remove certain celebrity
 * [x] Show all celebrities with all of its followers
 * [x] Show the follower that is owned by a certain celebrity
-* [ ] Show celebrity that has the most follower and all its followers
-* [ ] Show followers who follow more than three celebrity
+* [x] Show celebrity that has the most follower and all its followers
+* [x] Show followers who follow more than three celebrity
