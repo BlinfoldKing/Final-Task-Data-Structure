@@ -1,381 +1,228 @@
 #include "header.h"
+#include "userInterface.h"
+#include "clrscr.h"
+#include <stdio.h>
 
-addressCeleb AllocateCeleb (std::string username) {
-    
-    addressCeleb P;
-    P = new Celeb;
+using namespace std;
 
-    listFollowers Followers;
-    CreateListFollower(info (P).Followers);
 
-    info (P).username = username;
-    info (P).numberOfFollowers = 0;
-    next (P) = nullptr;
-    prev (P) = nullptr;
+listCelebs L_C;
+listFollowers L_F;
 
-    return P;
+addressCeleb currCeleb;
+addressFollower currFollower;
+
+int state = 0;
+
+void init () {
+    CreateListCeleb(L_C);
+    CreateListFollower(L_F);
 }
 
-addressCeleb GetCeleb (listCelebs &L, std::string username) {
+void Follow (string Follower, string Celeb) {
+    addressFollower F = GetFollower(L_F, Follower);
+    addressCeleb C = GetCeleb(L_C, Celeb);
 
-    addressCeleb P = first (L);
+    if (F != nullptr && C != nullptr) {
+        if (GetFollower(info(C).Followers, Follower) == nullptr) { 
+            InsertLastFollower(info(C).Followers, AllocateFollower(Follower));
+            info(C).numberOfFollowers++;
+            sortCeleb(L_C);
+        } else
+            cout << "username has already existed";
 
-    if (P != nullptr) {
-        while (P != last(L) && info (P).username != username )
-            P = next (P);
-    
-        if (info(P).username == username)
-            return P;
+        if (GetCeleb(info(F).Following, Celeb) == nullptr) { 
+            InsertLastCeleb(info(F).Following, AllocateCeleb(Celeb));
+            info(F).numberofFollowing++;
+            sortFollower(L_F);
+        } else
+            cout << "username has already existed";
     }
-     
-    return nullptr;
+
 }
 
-addressCeleb DeleteFirstCeleb (listCelebs &L) {
+void Unfollow (string Follower, string Celeb) {
+    addressFollower F = GetFollower(L_F, Follower);
+    addressCeleb C = GetCeleb(L_C, Celeb);
 
-    addressCeleb P = first (L);
-
-    if (P != nullptr) {
-        if (P == last (L)) {
-            first (L) = nullptr;
-            last (L)  = nullptr;
-        } else {
-            first (L) = next (first (L));
-            next (P) = nullptr;
-            prev (first (L)) = nullptr;
+    if (F != nullptr && C != nullptr) {
+        if (GetFollower(info(C).Followers, Follower) != nullptr) {
+            DeleteFollower(info(C).Followers, Follower);
+            info(C).numberOfFollowers--;
+        } else
+            cout << "Username doesn't exist";
+        if (GetCeleb(info(F).Following, Celeb) != nullptr) {
+            DeleteCeleb(info(F).Following, Celeb);
+            info(F).numberofFollowing--;
         }
     }
 
-    return P;
 }
 
-addressCeleb DeleteLastCeleb (listCelebs &L) {
-
-    addressCeleb P = last (L);
-
-    if (P != nullptr) {
-        if (P == first (L)) {
-            first (L) = nullptr;
-            last (L)  = nullptr;
-        }
-        else {
-            last (L) = prev(P);
-            prev (P) = nullptr;
-            next (last (L)) = nullptr;
-        }
-    }
-
-    return P;
-}
-
-addressCeleb DeleteCeleb (listCelebs &L, addressCeleb C) {
-
-    addressCeleb P = GetCeleb (L, info (C).username);
-
-    if (P != nullptr) {
-        if (P == first (L)) {
-            P = DeleteFirstCeleb (L);
-        } else if (P == last (L)) {
-            P = DeleteLastCeleb (L);
-        } else {
-            prev (next (P)) = prev (P);
-            next (prev (P)) = next (P);
-            next (P) = nullptr;
-            prev (P) = nullptr;
-        }
-    }
-
-    listFollowers Followers = info (C).Followers;
-
-    while (first (Followers) != nullptr) {
-        DeleteLastFollower (Followers);
-    }
-
-    return P;
-
-}
-
-void CreateListCeleb (listCelebs &L) {
-    first (L) = nullptr;
-    last (L) = nullptr;
-}
-
-void DeallocateCeleb (addressCeleb P) {
-    delete P;
-    P = nullptr;
-}
-
-void InsertFirstCeleb (listCelebs &L, addressCeleb C) {
-    if (first (L) == nullptr) {
-        first (L) = C;
-        last (L) = C;
-    } else {
-        next (C) = first (L);
-        prev (first (L)) = C;
-        first (L) = C;
+void Continue() {
+    char k;
+    cout << "\nEnter 0 continue >";
+    while( k != '0') {
+        cin >> k;
     }
 }
 
-void InsertLastCeleb (listCelebs &L, addressCeleb C) {
-    if (last (L) == nullptr) {
-        first (L) = C;
-        last (L) = C;
-    } else {
-        prev (C) = last (L);
-        next (last (L)) = C;
-        last (L) = C;
-    }
-}
+int main () {
+    clrscr();
+    init();
+    string menu[4] = {
+        "Celebrity Mode",
+        "Follower Mode",
+        "Admin Mode"
+        "Exit"
+    };
+    cout << "Choose the mode\n";
+    state = multiChoice (menu, 4);
 
-void InsertAfterCeleb (listCelebs &L, addressCeleb Prec, addressCeleb C) {
-    if (Prec != nullptr)
-        InsertLastCeleb (L, C);
-    else {
-        next (C) = next (Prec);
-        prev (C) = Prec;
-        prev (next (Prec)) = C;
-        next (Prec) = C;
-    }
-}
+    while (state != -1) {
 
-void sortCeleb (listCelebs &L1) {
-    
-    listCelebs L2;
-    CreateListCeleb (L2);
-    
-    while (first (L1) != nullptr) {
+        if (state == 0) {
+            cout << "Choose the mode\n";
+            state = multiChoice (menu, 4);
+        } else
+        if (state == 1) {
+            string submenu[3] = {
+                "Sign Up",
+                "Remove Account",
+                "Exit"
+            };
+            
+            int substate = multiChoice (submenu, 3);
+            clrscr();
+            while (substate != -1) {
+                if (substate == 0) {
+                    substate = multiChoice (submenu, 3);
+                } else
+                if (substate == 1) {
+                    InsertLastCeleb (L_C, AllocateCeleb(getString("Masukkan username Anda untuk mendaftar : ")));
+                    substate = 0;
+                } else 
+                if (substate == 2) {
+                    string username = getString("Masukkan username Anda untuk menghapus :")
+                    DeleteCeleb(L_C, GetCeleb(L_C, username));
+                    addressFollower P = first (L_F);
+                    while (P != nullptr) {
+                        DeleteCeleb(info(P).Following, GetCeleb(info(P).Following, username));    
+                        P = next(P);            
+                    }
+                    substate = 0;
+                } else 
+                if (substate == 2) {
+                    substate = -1;
+                } else
+                    substate = 0;
+            }
+            state = 0;
+        } else
+        if (state == 2) {
+            string submenu[5] = {
+                "Sign Up",
+                "Follow a Celebrity",
+                "Unfollow a Celebrity",
+                "Remove Account",
+                "Exit"
+            };
+            
+            int substate = multiChoice (submenu, 5);
+            clrscr();
+            while (substate != -1) {
+                if (substate == 0) {
+                    substate = multiChoice (submenu, 5);
+                } else
+                if (substate == 1) {
+                    InsertLastFollower (L_F, AllocateFollower(getString("Masukan username Anda untuk mendaftar : ")));
+                    substate = 0;
+                } else
+                if (substate == 2) {
+                    Follow(getString("Masukkan username Anda: "), getString("Masukkan username celebrity yang ingin Anda follow : "))
+                    substate = 0;
+                } else
+                if (substate == 3) {
+                    Unfollow(getString("Masukkan username Anda: "), getString("Masukkan username celebrity yang ingin Anda follow : "))
+                    substate = 0;
+                } else
+                if (substate == 4) {
+                    string username = getString("Masukkan username Anda untuk menghapus : ");
+                    DeleteFollower(L_F, GetFollower(L_F, username));
+                    addressCeleb P = first (L_C);
+                    while (P != nullptr) {
+                        DeleteFollower(info(P).Followers, GetFollower(info(P).Followers, username));    
+                        P = next(P);            
+                    }
+                    substate = 0;
+                } else
+                if (substate == 5)
+                    substate = -1;
+                else
+                    substate = 0;
+         } else
+        if (state == 3) {
+            string submenu[5] = {
+                "Show All Celebrities with its Follower(s)",
+                "Show A Certain Celebrity with its Follower(s)",
+                "Show Top Celeberity with its Follower(s)",
+                "Show All Followers with its Following",
+                "Show a Certain Follower with its Following",
+                "Show a Follower who Follow more than 3 Celebrities and its Following";
+            };
+                
+            int substate = multiChoice (submenu, 5);
+            clrscr();
+            while (substate != -1) {
+                if (substate == 0) {
+                    substate = multiChoice (submenu, 5);
+                } else
+                if (substate == 1) {
+                    viewAllCeleb(L_C);
+                    Continue();
+                    state = 0;
+                } else
+                if (substate == 2) {
+                    addressCeleb C = GetCeleb(L_C, getString("enter the celeb username : "));
+                    addressFollower F = GetFollower(info(C).Followers, getString("enter the follower name : "));
+                    if (F == nullptr) 
+                        cout << "Follower not found  ";
+                    else {
+                        viewFollower (info(C).Followers, info(F).username);
+                    }
+                    Continue();
+                    state = 0;
+                } else
+                if (substate == 3) {
+                    viewFollower(L_F);
+                    Continue();
+                    state = 0;
+                } else
+                if (substate == 4) {
+                    viewCeleb (L_C, info(last(L_C)).username);
+                    continue();
+                    state = 0;
+                } else
+                if (substate == 5) {
+                    addressFollower F = first(L_F);
 
-        addressCeleb P = DeleteLastCeleb (L1);
-        
-        if (first (L2) == nullptr)
-            InsertFirstCeleb (L2, P);
-        else if (info (P).numberOfFollowers <= info (first (L2)).numberOfFollowers)
-            InsertFirstCeleb (L2, P);
-        else if (info (P).numberOfFollowers >= info (first (L2)).numberOfFollowers)
-            InsertLastCeleb (L2, P);
-        else {
-            addressCeleb Q = first (L2);
-            while (info (next (Q)).numberOfFollowers < info (P).numberOfFollowers)
-                Q = next (Q);
-            InsertAfterCeleb(L2, Q, P);
-        }
+                    while (F != nullptr) {
 
-    }
+                        if(info(F).numberofFollowing > 3) {
+                            cout << info(F).username;
+                        }
 
-    L1 = L2;
-}
-
-void viewAllCeleb (listCelebs L) {
-    if (first (L) != nullptr && last (L) != nullptr) {
-        addressCeleb P = first(L);
-        while (P != nullptr) {
-            std::cout << "  " << info(P).username << '\n';
-            P = next (P);
-        }
-    } else {
-        std::cout << "[empty]\n";
-    }
-
-}
-
-void viewCeleb (listCelebs L, std::string username) {
-    if (first (L) != nullptr && last (L) != nullptr) {
-        addressCeleb P = GetCeleb (L, username);
-        if (P == nullptr)
-            std::cout << "username doesn't exits";
-        else {
-            std::cout << "username       : " << info (P).username;
-            std::cout << "\nfollower count : " << info (P).numberOfFollowers;
-            std::cout << "\nFollowers   : \n";
-            viewAllFollower (info (P).Followers);
-        }
-    }
-}
-
-// Followers Implementation
-
-addressFollower AllocateFollower (std::string username) {
-    
-    addressFollower P;
-    P = new Follower;
-
-    listCelebs Following;
-    CreateListCeleb(info (P).Following);
-
-    info (P).username = username;
-    info (P).numberofFollowing = 0;
-    next (P) = nullptr;
-    prev (P) = nullptr;
-
-    return P;
-}
-
-
-addressFollower GetFollower (listFollowers &L, std::string username) {
-   
-    addressFollower P = first (L);
-
-    while (P != nullptr && info (P).username != username && P != last(L))
-        P = next (P);
-
-    return P; 
-}
-
-addressFollower DeleteFirstFollower (listFollowers &L) {
-    
-    addressFollower P = first (L);
-
-    if (P != nullptr) {
-        if (P == last (L)) {
-            last (L)  = nullptr;
-            first (L) = nullptr;
-        } else {
-            first (L) = next (first (L));
-            next (P) = nullptr;
-            prev (first (L)) = nullptr;
+                        F = next(F);
+                    }   
+                    Continue();
+                    state = 0; 
+                } else
+                if (substate == 6)
+                    substate = -1;
+                else
+                    substate = 0;
         }
     }
 
-    return P;
-}
-
-addressFollower DeleteLastFollower (listFollowers &L) {
-
-    addressFollower P = last (L);
-
-    if (P != nullptr) {
-        if (P == first (L)) {
-            last (L)  = nullptr;
-            first (L) = nullptr;
-        }
-        else {
-            last (L) = prev (P);
-            prev (P) = nullptr;
-            next (last (L)) = nullptr;
-        }
-    }
-
-    return P;
-
-}
-
-addressFollower DeleteFollower (listFollowers &L, addressFollower F) {
-    
-    addressFollower P = GetFollower (L, info (F).username);
-
-    if (P != nullptr) {
-        if (P == first (L))
-            P = DeleteFirstFollower (L);
-        else if (P == last (L))
-            P = DeleteLastFollower (L);
-        else {
-            prev (next (P)) = prev (P);
-            next (prev (P)) = next (P);
-            next (P) = nullptr;
-            prev (P) = nullptr;
-        }
-    }
-
-    listCelebs Following = info (F).Following;
-
-    while (first (Following) != nullptr) {
-        DeleteLastCeleb (Following);
-    }
-
-    return P;
-}
-
-void DeallocateFollower (addressFollower P) {
-    delete P;
-    P = nullptr;
-}
-
-void InsertFirstFollower (listFollowers &L, addressFollower F) {
-    if (first (L) == nullptr) {
-        first (L) = F;
-        last (L) = F;
-    } else {
-        next (F) = first (L);
-        prev (first (L)) = F;
-        first (L) = F;
-    }
-}
-
-void InsertLastFollower (listFollowers &L, addressFollower F) {
-    if (last (L) == nullptr) {
-        first (L) = F;
-        last (L) = F;
-    } else {
-        prev (F) = last (L);
-        next (last (L)) = F;
-        last (L) = F;
-    }
-}
-
-void InsertAfterFollower (listFollowers &L, addressFollower Prec, addressFollower F) {
-    if (Prec != nullptr)
-        InsertLastFollower (L, F);
-    else {
-        next (F) = next (Prec);
-        prev (F) = Prec;
-        prev (next (Prec)) = F;
-        next (Prec) = F;
-    }
-}
-
-void CreateListFollower (listFollowers &L) {
-    first (L) = nullptr;
-    last (L) = nullptr;
-}
-
-void sortFollower (listFollowers &L1) {
-    listFollowers L2;
-    CreateListFollower (L2);
-
-    while (first (L1) != nullptr) {
-        
-        addressFollower P = DeleteLastFollower(L1);
-        
-        if (first (L2) == nullptr)
-            InsertFirstFollower (L2, P);
-        else if (info (P).numberofFollowing <= info (first (L2)).numberofFollowing)
-            InsertFirstFollower (L2, P);
-        else if (info (P).numberofFollowing >= info (first (L2)).numberofFollowing)
-            InsertLastFollower (L2, P);
-        else {
-            addressFollower Q = first (L2);
-            while (info (next (Q)).numberofFollowing < info (P).numberofFollowing)
-                Q = next (Q);
-            InsertAfterFollower (L2, Q, P);
-        }
-    }
-
-    L1 = L2;
-}
-
-
-void viewAllFollower (listFollowers L) {
-    if (first (L) != nullptr && last (L) != nullptr) {
-        addressFollower P = first(L);
-        while (P != nullptr) {
-            std::cout << "username    : " << info(P).username << '\n';
-            std::cout << "following count : " << info(P).numberofFollowing;
-            std::cout << "\n followers : \n";
-            P = next (P);
-        }
-    } else {
-        std::cout << "[empty]\n";
-    }
-}
-
-void viewFollower (listFollowers L, std::string username) {
-    if (first (L) != nullptr && last (L) != nullptr) {
-        addressFollower P = GetFollower (L, username);
-        if (P == nullptr)
-            std::cout << "username doesn't exits";
-        else {
-            std::cout << info (P).username;
-            viewAllCeleb (info (P).Following);
-        }
-    }
+    return 0;
 }
