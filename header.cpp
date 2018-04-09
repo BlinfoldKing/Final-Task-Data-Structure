@@ -20,13 +20,12 @@ addressCeleb GetCeleb (listCelebs &L, std::string username) {
 
     addressCeleb P = first (L);
 
-    if (P != nullptr) {
-        while (P != last(L) && info (P).username != username )
-            P = next (P);
-    
+    while (P != nullptr ) {
         if (info(P).username == username)
             return P;
+        P = next (P);
     }
+    
      
     return nullptr;
 }
@@ -186,7 +185,7 @@ void viewCeleb (listCelebs L, std::string username) {
         else {
             std::cout << "username       : " << info (P).username;
             std::cout << "\nfollower count : " << info (P).numberOfFollowers;
-            std::cout << "\nFollowers   : \n";
+            std::cout << "\nFollowers   : \n\n";
             viewAllFollower (info (P).Followers);
         }
     }
@@ -213,12 +212,17 @@ addressFollower AllocateFollower (std::string username) {
 
 addressFollower GetFollower (listFollowers &L, std::string username) {
    
+    
     addressFollower P = first (L);
 
-    while (P != nullptr && info (P).username != username && P != last(L))
+    while (P != nullptr ) {
+        if (info(P).username == username)
+            return P;
         P = next (P);
-
-    return P; 
+    }
+    
+     
+    return nullptr;
 }
 
 addressFollower DeleteFirstFollower (listFollowers &L) {
@@ -358,9 +362,7 @@ void viewAllFollower (listFollowers L) {
     if (first (L) != nullptr && last (L) != nullptr) {
         addressFollower P = first(L);
         while (P != nullptr) {
-            std::cout << "username    : " << info(P).username << '\n';
-            std::cout << "following count : " << info(P).numberofFollowing;
-            std::cout << "\n followers : \n";
+            std::cout << info(P).username << '\n';
             P = next (P);
         }
     } else {
@@ -374,7 +376,9 @@ void viewFollower (listFollowers L, std::string username) {
         if (P == nullptr)
             std::cout << "username doesn't exits";
         else {
-            std::cout << info (P).username;
+            std::cout << "username    : " << info(P).username << '\n';
+            std::cout << "following count : " << info(P).numberofFollowing;
+            std::cout << "\n following : \n\n";
             viewAllCeleb (info (P).Following);
         }
     }

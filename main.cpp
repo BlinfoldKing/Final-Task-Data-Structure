@@ -29,14 +29,16 @@ void Follow (string Celeb, string Follower) {
             info(C).numberOfFollowers++;
             sortCeleb(L_C);
         } else
-            cout << "username has already existed";
+            cout << "follower has already existed";
 
         if (GetCeleb(info(F).Following, Celeb) == nullptr) { 
             InsertLastCeleb(info(F).Following, AllocateCeleb(Celeb));
             info(F).numberofFollowing++;
             sortFollower(L_F);
         } else
-            cout << "username has already existed";
+            cout << "celeb has already existed";
+    } else {
+        cout << "either celeb or follower doesn't existed";
     }
 
 }
@@ -47,16 +49,18 @@ void Unfollow (string Celeb, string Follower) {
 
     if (C != nullptr && F != nullptr) {
         if (GetFollower(info(C).Followers, Follower) != nullptr) { 
-            DeleteCeleb(info(C).Followers, GetFollower(info(C).Followers, Follower));
+            DeleteFollower(info(C).Followers, GetFollower(info(C).Followers, Follower));
             info(C).numberOfFollowers--;
         } else
             cout << "username doesn't exist";
 
         if (GetCeleb(info(F).Following, Celeb) != nullptr) { 
-            DeleteFollower(info(F).Following, GetCeleb(info(F).Following, Celeb));
+            DeleteCeleb(info(F).Following, GetCeleb(info(F).Following, Celeb));
             info(F).numberofFollowing--;
         } else
             cout << "username doesn't exits";
+    } else {
+        cout << "either celeb or follower doesn't existed";
     }
 
 }
@@ -81,7 +85,7 @@ int main () {
     state = multiChoice(menu, 4);
 
     while (state != -1) {
-        
+        clrscr();
         if (state == 0){
             cout << "Choose the mode\n";
             state = multiChoice(menu, 4);
@@ -131,6 +135,7 @@ int main () {
             int substate = multiChoice(submenu, 5);
             clrscr();
             while(substate != -1) {
+                clrscr();
                 if (substate == 0) {
                     substate = multiChoice(submenu, 5);
                 }
@@ -140,14 +145,16 @@ int main () {
                 } else
                 if (substate == 2) {
                     Follow(getString("masukan username celeb : "), getString("masukan username follower : "));
+                    Continue();
                     substate = 0;
                 } else
                 if (substate == 3) {
                     Unfollow(getString("masukan username celeb : "), getString("masukan username follower : "));
+                    Continue();
                     substate = 0;
                 } else
                 if (substate == 4) {
-                    tring username = getString("masukan username follower yang akan dihapus : ");
+                    string username = getString("masukan username follower yang akan dihapus : ");
                     DeleteFollower(L_F, GetFollower(L_F, username));
                     addressCeleb P = first (L_C);
                     while (P != nullptr) {
@@ -164,7 +171,7 @@ int main () {
         } else
         if (state == 3) {
             clrscr();
-            string submenu[5] = {
+            string submenu[7] = {
                 "Show all Celebrities and its Followers",
                 "Show a certain Celebrity and its Followers",
                 "Show top Celebrity and its Followers",
@@ -176,16 +183,27 @@ int main () {
             int substate = multiChoice(submenu, 7);
             clrscr();
             while(substate != -1) {
+                clrscr();
                 if (substate == 0) {
                     substate = multiChoice(submenu, 7);
                 } else
                 if (substate == 1) {
-                    viewAllCeleb(L_C);
+
+                    addressCeleb C = first (L_C);
+
+                    while (C != nullptr){
+                        cout << "========================\n";
+                        viewCeleb (L_C, info(C).username);
+                        cout << "========================";
+                        cout << '\n';
+                        C = next (C);
+                    }
+
                     Continue();
                     substate = 0;
                 } else
                 if (substate == 2) {
-                    viewCeleb(L_C, getString("enter the follower username : "));
+                    viewCeleb(L_C, getString("enter the Celeb username : "));
                     Continue();
                     substate = 0;
                 } else
@@ -195,7 +213,15 @@ int main () {
                     substate = 0;
                 } else
                 if (substate == 4) {
-                    viewAllFollower(L_F);
+                    addressFollower F = first (L_F);
+
+                    while (F != nullptr){
+                        cout << "========================\n";
+                        viewFollower (L_F, info(F).username);
+                        cout << "========================";
+                        cout << '\n';
+                        F = next (F);
+                    }
                     Continue();
                     substate = 0;
                 } else
@@ -205,21 +231,23 @@ int main () {
                     substate = 0;
                 } else
                 if (substate == 6) {
-                addressFollower F = first(L_F);
+                    addressFollower F = first(L_F);
 
-                while (F != nullptr) {
+                    while (F != nullptr) {
 
-                    if(info(F).numberofFollowing > 3) {
-                        cout << info(F).username;
-                    }
+                        if(info(F).numberofFollowing > 3) {
+                            cout << info(F).username;
+                        }
 
-                    F = next(F);
-                }   
-                Continue();
-                state = 0;     
-                } else if (substate == 7) {
+                        F = next(F);
+                    }   
+                    Continue();
+                    substate = 0;     
+                } else 
+                if (substate == 7) {
                     substate = -1;
-                } else substate = 0;
+                    state = 0;
+                }
             }
         } else
         if (state == 4){
