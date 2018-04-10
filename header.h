@@ -43,7 +43,7 @@ struct Celeb {
 };
 
 addressCeleb AllocateCeleb (std::string username);
-addressCeleb GetCeleb (listCelebs &L, std::string username);
+addressCeleb GetCeleb (listCelebs L, std::string username);
 addressCeleb DeleteFirstCeleb (listCelebs &L);
 addressCeleb DeleteLastCeleb (listCelebs &L);
 addressCeleb DeleteCeleb (listCelebs &L, addressCeleb C);
@@ -72,7 +72,7 @@ struct Follower {
 };
 
 addressFollower AllocateFollower (std::string username);
-addressFollower GetFollower (listFollowers &Followers, std::string username);
+addressFollower GetFollower (listFollowers Followers, std::string username);
 addressFollower DeleteFollower (listFollowers &L, addressFollower C);
 addressFollower DeleteFirstFollower (listFollowers &L);
 addressFollower DeleteLastFollower (listFollowers &L);

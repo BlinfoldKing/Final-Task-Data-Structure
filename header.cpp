@@ -16,7 +16,7 @@ addressCeleb AllocateCeleb (std::string username) {
     return P;
 }
 
-addressCeleb GetCeleb (listCelebs &L, std::string username) {
+addressCeleb GetCeleb (listCelebs L, std::string username) {
 
     addressCeleb P = first (L);
 
@@ -210,7 +210,7 @@ addressFollower AllocateFollower (std::string username) {
 }
 
 
-addressFollower GetFollower (listFollowers &L, std::string username) {
+addressFollower GetFollower (listFollowers L, std::string username) {
    
     
     addressFollower P = first (L);
