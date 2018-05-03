@@ -236,7 +236,10 @@ int main () {
                     while (F != nullptr) {
 
                         if(info(F).numberofFollowing > 3) {
-                            cout << info(F).username;
+                            cout << "username    : " << info(F).username << '\n';
+                            cout << "following count : " << info(F).numberofFollowing;
+                            cout << "\n following : \n\n";
+                            viewAllCeleb (info (F).Following);
                         }
 
                         F = next(F);
