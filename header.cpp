@@ -116,13 +116,18 @@ void InsertFirstCeleb (listCelebs &L, addressCeleb C) {
 }
 
 void InsertLastCeleb (listCelebs &L, addressCeleb C) {
-    if (last (L) == nullptr) {
-        first (L) = C;
-        last (L) = C;
-    } else {
-        prev (C) = last (L);
-        next (last (L)) = C;
-        last (L) = C;
+    if (GetCeleb (L, info (C).username) == nullptr) {
+        if (last (L) == nullptr) {
+            first (L) = C;
+            last (L) = C;
+        } else {
+            prev (C) = last (L);
+            next (last (L)) = C;
+            last (L) = C;
+        }
+    }
+    else {
+        DeallocateCeleb(C);
     }
 }
 
@@ -306,13 +311,18 @@ void InsertFirstFollower (listFollowers &L, addressFollower F) {
 }
 
 void InsertLastFollower (listFollowers &L, addressFollower F) {
-    if (last (L) == nullptr) {
-        first (L) = F;
-        last (L) = F;
-    } else {
-        prev (F) = last (L);
-        next (last (L)) = F;
-        last (L) = F;
+    if (GetFollower (L, info (F).username) == nullptr) {
+        if (last (L) == nullptr) {
+            first (L) = F;
+            last (L) = F;
+        } else {
+            prev (F) = last (L);
+            next (last (L)) = F;
+            last (L) = F;
+        }
+    }
+    else {
+        DeallocateFollower(F);
     }
 }
 
